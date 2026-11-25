@@ -28,18 +28,18 @@ from .backend import (
 from .cli import elevate_command
 
 BAND_OPTIONS = [
-    ("5g-low", "5 GHz Wi-Fi 6 • Channel 36 (80 MHz)", 36),
-    ("5g-high", "5 GHz Wi-Fi 6 • Channel 149 (80 MHz)", 149),
-    ("2g", "2.4 GHz Wi-Fi 6 • Channel 6 (20 MHz)", 6),
+    ("5g-low", "5 GHz • Ch 36 (80 MHz)", 36),
+    ("5g-high", "5 GHz • Ch 149 (80 MHz)", 149),
+    ("2g", "2.4 GHz • Ch 6 (20 MHz)", 6),
 ]
 SEC_OPTIONS = [
-    ("wpa2", "WPA2-PSK (AES/CCMP — Best Compatibility)"),
-    ("wpa2-wpa3", "WPA2 / WPA3 Mixed (Transition)"),
+    ("wpa2", "WPA2-PSK (AES)"),
+    ("wpa2-wpa3", "WPA2 / WPA3 Mixed"),
     ("wpa3", "WPA3-SAE Only"),
 ]
 BACKEND_OPTIONS = [
-    ("hostapd", "hostapd + dnsmasq (Full Wi-Fi 6 / 80 MHz)"),
-    ("nmcli", "NetworkManager Hotspot (Zero Extra Config)"),
+    ("hostapd", "hostapd + dnsmasq"),
+    ("nmcli", "NetworkManager (nmcli)"),
 ]
 
 
@@ -155,7 +155,7 @@ class AirCastWindow(Adw.ApplicationWindow):
         net_group.add(self.country_row)
 
         # --- Internet Sharing & Backend Group ---
-        adv_group = Adw.PreferencesGroup(title="Internet Sharing & Engine")
+        adv_group = Adw.PreferencesGroup(title="Internet Sharing &amp; Engine")
         box.append(adv_group)
 
         self.backend_row = Adw.ComboRow(title="AP Backend")

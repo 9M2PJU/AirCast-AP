@@ -27,9 +27,10 @@ from .backend import (
 
 def elevate_command(args: list[str]) -> tuple[bool, str]:
     """Run privileged CLI subcommand via pkexec (GUI) or sudo (TTY)."""
-    helper = [sys.executable, "-m", "aircast_ap.cli", *args]
+    pkg_root = str(Path(__file__).resolve().parent.parent)
+    helper = ["env", f"PYTHONPATH={pkg_root}", sys.executable, "-m", "aircast_ap.cli", *args]
     if os.geteuid() == 0:
-        cmd = helper
+        cmd = [sys.executable, "-m", "aircast_ap.cli", *args]
     elif shutil.which("pkexec") and (os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")):
         cmd = ["pkexec", *helper]
     elif shutil.which("sudo"):

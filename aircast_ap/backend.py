@@ -71,14 +71,14 @@ class WifiInterface:
     @property
     def label(self) -> str:
         tags = []
-        if self.wifi6_ap:
-            tags.append("Wi-Fi 6 AP")
-        elif self.ap_supported:
-            tags.append("AP")
         if self.driver in ("rtl8852cu", "8852cu", "rtw89_8852cu"):
-            tags.append("Realtek 8852CU")
+            tags.append("8852CU")
         elif self.driver:
             tags.append(self.driver)
+        if self.wifi6_ap:
+            tags.append("Wi-Fi 6")
+        elif self.ap_supported:
+            tags.append("AP")
         tag_str = f" ({', '.join(tags)})" if tags else ""
         return f"{self.name}{tag_str}"
 
