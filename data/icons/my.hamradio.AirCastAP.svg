@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="50%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Rounded Squircle Icon Base -->
+  <rect x="12" y="12" width="232" height="232" rx="54" fill="url(#bg)" stroke="#6366F1" stroke-opacity="0.45" stroke-width="3"/>
+
+  <!-- Outer Wi-Fi 6 Broadcast Arc -->
+  <path d="M 52 108 A 106 106 0 0 1 204 108" fill="none" stroke="url(#wave)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Mid Broadcast Arc -->
+  <path d="M 78 134 A 70 70 0 0 1 178 134" fill="none" stroke="url(#wave)" stroke-width="14" stroke-linecap="round" opacity="0.92"/>
+  <!-- Inner Broadcast Arc -->
+  <path d="M 103 159 A 36 36 0 0 1 153 159" fill="none" stroke="url(#wave)" stroke-width="13" stroke-linecap="round" opacity="0.88"/>
+
+  <!-- Antenna Tower Stem + Core Node -->
+  <line x1="128" y1="184" x2="128" y2="218" stroke="url(#core)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 106 218 L 150 218" stroke="url(#core)" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+  <circle cx="128" cy="180" r="15" fill="url(#core)" filter="url(#glow)"/>
+  <circle cx="128" cy="180" r="6" fill="#FFFFFF"/>
+
+  <!-- Wi-Fi 6 Badge -->
+  <rect x="172" y="180" width="46" height="32" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+  <text x="195" y="202" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="800" font-size="18" fill="#67E8F9">6</text>
+</svg>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AirCast-AP — CLI & privileged helper entry point."""
+"""AirCast-AP - CLI & privileged helper entry point."""
 
 from __future__ import annotations
 
@@ -94,7 +94,7 @@ def cmd_status(args: argparse.Namespace) -> int:
         return 0
 
     state_str = "ACTIVE" if st["active"] else "INACTIVE"
-    print(f"AirCast-AP v{__version__} — {state_str}")
+    print(f"AirCast-AP v{__version__} - {state_str}")
     if st["active"]:
         print(f"  Interface : {st['iface']} ({st['ap_ip']})")
         print(f"  SSID      : {st['ssid']} (band: {st['band']}, ch: {st['channel']})")
@@ -126,7 +126,7 @@ def cmd_tune_8852cu(_args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="aircast-ap", description="AirCast-AP — Linux Wi-Fi 6 Access Point Manager")
+    parser = argparse.ArgumentParser(prog="aircast-ap", description="AirCast-AP - Linux Wi-Fi 6 Access Point Manager")
     parser.add_argument("--version", action="version", version=f"AirCast-AP {__version__}")
     sub = parser.add_subparsers(dest="cmd")
 
@@ -137,7 +137,7 @@ def main(argv: list[str] | None = None) -> int:
     p_start.add_argument("--config-json", help="Path to JSON config file")
     p_start.add_argument("-i", "--iface", help="AP Wi-Fi interface (e.g. wlan1)")
     p_start.add_argument("-s", "--ssid", help="Network SSID")
-    p_start.add_argument("-p", "--password", help="WPA2/WPA3 password (8–63 chars)")
+    p_start.add_argument("-p", "--password", help="WPA2/WPA3 password (8-63 chars)")
     p_start.add_argument("-b", "--band", choices=["5g-low", "5g-high", "2g"], help="Band preset")
     p_start.add_argument("-c", "--channel", type=int, help="Wi-Fi channel")
     p_start.add_argument("--country", help="2-letter ISO country code")

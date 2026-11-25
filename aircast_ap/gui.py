@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AirCast-AP — Modern GTK4 + Libadwaita Native Wayland GUI."""
+"""AirCast-AP - Modern GTK4 + Libadwaita Native Wayland GUI."""
 
 from __future__ import annotations
 
@@ -76,6 +76,16 @@ class AirCastWindow(Adw.ApplicationWindow):
         self.toast_overlay.set_child(toolbar_view)
 
         header = Adw.HeaderBar()
+        title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8, valign=Gtk.Align.CENTER)
+        logo_path = Path(__file__).resolve().parent.parent / "data" / "icons" / "aircast-ap-logo.png"
+        if logo_path.exists():
+            logo_pic = Gtk.Image.new_from_file(str(logo_path))
+            logo_pic.set_pixel_size(22)
+            title_box.append(logo_pic)
+        title_lbl = Gtk.Label(label="AirCast-AP")
+        title_lbl.add_css_class("heading")
+        title_box.append(title_lbl)
+        header.set_title_widget(title_box)
         toolbar_view.add_top_bar(header)
 
         # Header refresh & about buttons
@@ -115,7 +125,7 @@ class AirCastWindow(Adw.ApplicationWindow):
 
         # Optional 8852cu Wi-Fi 6 AP hint banner
         self.tune_banner = Adw.Banner(
-            title="RTL8852CU detected — enable Wi-Fi 6 AP params (rtw_he_enable=2, rtw_vht_enable=2)",
+            title="RTL8852CU detected - enable Wi-Fi 6 AP params (rtw_he_enable=2, rtw_vht_enable=2)",
             button_label="Enable & Reload",
         )
         self.tune_banner.connect("button-clicked", self._on_tune_8852cu)
@@ -132,7 +142,7 @@ class AirCastWindow(Adw.ApplicationWindow):
         self.ssid_row.set_text(self.cfg.ssid)
         net_group.add(self.ssid_row)
 
-        self.pass_row = Adw.PasswordEntryRow(title="Passphrase (8–63 characters)")
+        self.pass_row = Adw.PasswordEntryRow(title="Passphrase (8-63 characters)")
         self.pass_row.set_text(self.cfg.password)
         net_group.add(self.pass_row)
 
@@ -191,6 +201,16 @@ class AirCastWindow(Adw.ApplicationWindow):
         self.clients_group = Adw.PreferencesGroup(title="Connected Clients (0)")
         box.append(self.clients_group)
         self.client_rows: list[Gtk.Widget] = []
+
+        # --- Footer Credits ---
+        footer = Gtk.Label(
+            label="AirCast-AP v" + __version__ + " by 9M2PJU (hamradio.my) | Companion to rtl8852cu-9M2PJU-dkms",
+            halign=Gtk.Align.CENTER,
+            margin_top=6,
+        )
+        footer.add_css_class("dim-label")
+        footer.add_css_class("caption")
+        box.append(footer)
 
         # Live QR updates
         self.ssid_row.connect("changed", lambda *_: self._update_qr())
@@ -276,7 +296,7 @@ class AirCastWindow(Adw.ApplicationWindow):
             self.toggle_btn.add_css_class("destructive-action")
         else:
             self.status_row.set_title("Access Point Inactive")
-            self.status_row.set_subtitle("Ready — configure your hotspot and press Start AP")
+            self.status_row.set_subtitle("Ready - configure your hotspot and press Start AP")
             self.status_icon.set_from_icon_name("network-wireless-offline-symbolic")
             self.toggle_btn.set_label("Start AP")
             self.toggle_btn.remove_css_class("destructive-action")
@@ -334,7 +354,7 @@ class AirCastWindow(Adw.ApplicationWindow):
 
         cfg = self._gather_config()
         if len(cfg.password) < 8 or len(cfg.password) > 63:
-            self._toast("Password must be 8–63 characters")
+            self._toast("Password must be 8-63 characters")
             return
         cfg.save()
 
@@ -349,14 +369,39 @@ class AirCastWindow(Adw.ApplicationWindow):
     def _show_about(self, *_args: object) -> None:
         dlg = Adw.AboutDialog(
             application_name="AirCast-AP",
-            application_icon="network-wireless-hotspot-symbolic",
-            developer_name="9M2PJU",
+            application_icon="my.hamradio.AirCastAP",
+            developer_name="9M2PJU (Faizul)",
             version=__version__,
             website="https://github.com/9M2PJU/AirCast-AP",
             issue_url="https://github.com/9M2PJU/AirCast-AP/issues",
+            support_url="https://hamradio.my",
             license_type=Gtk.License.GPL_3_0,
-            comments="Modern GTK4 + Libadwaita Wi-Fi 6 Access Point & Hotspot Manager for Linux.\nBuilt as a companion to rtl8852cu-9M2PJU-dkms. 73 de 9M2PJU!",
+            copyright="Copyright (C) 2026 9M2PJU (https://hamradio.my)",
+            comments=(
+                "Modern GTK4 + Libadwaita Wi-Fi 6 Access Point and Hotspot Manager for Linux.\n"
+                "Built as a companion app to rtl8852cu-9M2PJU-dkms. 73 de 9M2PJU!"
+            ),
         )
+        dlg.set_developers([
+            "9M2PJU (Faizul) <9m2pju@hamradio.my>",
+        ])
+        dlg.set_designers([
+            "9M2PJU (UI & AirCast-AP Logo)",
+        ])
+        dlg.add_credit_section(
+            "Companion Driver & Upstream Projects",
+            [
+                "rtl8852cu-9M2PJU-dkms https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms",
+                "morrownr USB-WiFi https://github.com/morrownr/USB-WiFi",
+                "hostapd / wpa_supplicant https://w1.fi/hostapd/",
+                "dnsmasq https://thekelleys.org.uk/dnsmasq/doc.html",
+                "GTK4 & Libadwaita https://gnome.pages.gitlab.gnome.org/libadwaita/",
+            ],
+        )
+        dlg.add_link("Buy Me A Coffee", "https://www.buymeacoffee.com/9m2pju")
+        dlg.add_link("GitHub Sponsors", "https://github.com/sponsors/9M2PJU")
+        dlg.add_link("PayPal", "https://www.paypal.com/paypalme/9M2PJU")
+        dlg.add_link("Wise", "https://wise.com/pay/me/faizulz13")
         dlg.present(self)
 
 
@@ -365,6 +410,12 @@ class AirCastApp(Adw.Application):
         super().__init__(application_id="my.hamradio.AirCastAP", flags=Gio.ApplicationFlags.FLAGS_NONE)
 
     def do_activate(self) -> None:
+        display = Gdk.Display.get_default()
+        if display:
+            theme = Gtk.IconTheme.get_for_display(display)
+            local_icons = Path(__file__).resolve().parent.parent / "data" / "icons"
+            if local_icons.exists():
+                theme.add_search_path(str(local_icons))
         win = self.props.active_window
         if not win:
             win = AirCastWindow(self)

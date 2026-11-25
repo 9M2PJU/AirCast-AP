@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AirCast-AP — Core AP backend (interface discovery, hostapd/dnsmasq/NAT, nmcli, client stats)."""
+"""AirCast-AP - Core AP backend (interface discovery, hostapd/dnsmasq/NAT, nmcli, client stats)."""
 
 from __future__ import annotations
 
@@ -243,14 +243,14 @@ def get_connected_clients(iface: str) -> list[dict[str, str]]:
             if cur:
                 clients.append(cur)
             mac = line.split()[1].lower()
-            ip, host = leases.get(mac, ("—", "—"))
+            ip, host = leases.get(mac, ("-", "-"))
             cur = {
                 "mac": mac,
                 "ip": ip,
-                "hostname": host if host != "*" else "—",
-                "signal": "—",
-                "tx_bitrate": "—",
-                "rx_bitrate": "—",
+                "hostname": host if host != "*" else "-",
+                "signal": "-",
+                "tx_bitrate": "-",
+                "rx_bitrate": "-",
             }
         elif cur:
             s = line.strip()
@@ -280,7 +280,7 @@ def start_ap_root(cfg: APConfig) -> tuple[bool, str]:
     if not cfg.iface:
         return False, "No wireless interface selected."
     if not (8 <= len(cfg.password) <= 63):
-        return False, "Password must be 8–63 characters."
+        return False, "Password must be 8-63 characters."
 
     stop_ap_root()
     STATE_DIR.mkdir(parents=True, exist_ok=True)

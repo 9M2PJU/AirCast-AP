@@ -1,6 +1,8 @@
 <div align="center">
 
-# 📡 AirCast-AP
+<img src="data/icons/aircast-ap-logo.png" alt="AirCast-AP Logo" width="128" />
+
+# AirCast-AP
 
 **Modern GTK4 + Libadwaita Wi-Fi 6 Access Point & Hotspot Manager for Linux**  
 *Turn any AP-capable Linux Wi-Fi adapter (including Realtek RTL8852CU / RTL8832CU) into a fast 5 GHz Wi-Fi 6 / WPA3 hotspot with live QR sharing, NAT routing, and connected-client monitoring.*
@@ -27,20 +29,27 @@
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <img src="docs/screenshots/aircast-main.png" alt="AirCast-AP Main Configuration" width="100%" /><br/>
       <b>Main View &amp; RTL8852CU Auto-Detection</b><br/>
       <sub>Adapter detection, 1-click Wi-Fi 6 AP tuning banner, band/security/NAT controls</sub>
     </td>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <img src="docs/screenshots/aircast-live.png" alt="AirCast-AP Live Active Hotspot" width="100%" /><br/>
       <b>Live Active Access Point</b><br/>
       <sub>Live SSID/IP/channel banner with 1-click Stop AP &amp; clean client-mode restore</sub>
     </td>
-    <td align="center" width="33%">
+  </tr>
+  <tr>
+    <td align="center" width="50%">
       <img src="docs/screenshots/aircast-qr-clients.png" alt="AirCast-AP Live Wi-Fi QR and Connected Clients" width="100%" /><br/>
-      <b>Wi-Fi QR &amp; Connected Clients</b><br/>
-      <sub>Instant phone-camera QR code + live DHCP/RSSI/bitrate client list</sub>
+      <b>Wi-Fi QR, Connected Clients &amp; Footer Credits</b><br/>
+      <sub>Instant phone-camera QR code + live DHCP/RSSI/bitrate client monitor</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/aircast-about.png" alt="AirCast-AP About Dialog and Credits" width="100%" /><br/>
+      <b>About Dialog &amp; Full Credits</b><br/>
+      <sub>Custom Wi-Fi 6 app logo, credits, companion driver &amp; support links</sub>
     </td>
   </tr>
 </table>
@@ -49,15 +58,15 @@
 
 ## ✨ Features
 
-- 🎨 **Native GTK4 + Libadwaita UI** — Clean, lightweight Wayland/X11 desktop app (zero Electron bloat) with automatic dark/light theming and Polkit (`pkexec`) privilege prompts
+- 🎨 **Native GTK4 + Libadwaita UI** - Clean, lightweight Wayland/X11 desktop app (zero Electron bloat) with automatic dark/light theming and Polkit (`pkexec`) privilege prompts
 - 📶 **Dual AP Backends:**
-  - **`hostapd` + `dnsmasq` + `nftables`/`iptables` NAT** — Full **Wi-Fi 6 (802.11ax)**, **5 GHz 80 MHz** (ch 36 / ch 149) & **2.4 GHz**, **WPA2-PSK**, **WPA2/WPA3 Mixed**, and **WPA3-SAE**
-  - **NetworkManager (`nmcli`)** — Instant zero-config hotspot when `hostapd` isn't installed
-- 📱 **Live Wi-Fi QR Code** — Scannable QR card in the GUI (and terminal `--qr` flag) that updates live as you edit SSID/passphrase
-- 👥 **Connected Clients Monitor** — Live polling of connected devices (hostname, IP from DHCP leases, MAC address, RSSI signal, TX bitrate)
-- ⚡ **Built-in Realtek `8852cu` Optimizer** — Automatically detects [`rtl8852cu-9M2PJU-dkms`](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms) adapters and shows a 1-click **Enable & Reload** banner for `rtw_he_enable=2 rtw_vht_enable=2`
-- 🧹 **Clean Teardown** — Stopping the AP removes temporary NAT rules, stops `hostapd`/`dnsmasq`, and cleanly restores your adapter to NetworkManager managed mode
-- 💻 **Full CLI Included** — Control or script your hotspot headlessly over SSH (`aircast-ap start|stop|status|devices`)
+  - **`hostapd` + `dnsmasq` + `nftables`/`iptables` NAT** - Full **Wi-Fi 6 (802.11ax)**, **5 GHz 80 MHz** (ch 36 / ch 149) & **2.4 GHz**, **WPA2-PSK**, **WPA2/WPA3 Mixed**, and **WPA3-SAE**
+  - **NetworkManager (`nmcli`)** - Instant zero-config hotspot when `hostapd` isn't installed
+- 📱 **Live Wi-Fi QR Code** - Scannable QR card in the GUI (and terminal `--qr` flag) that updates live as you edit SSID/passphrase
+- 👥 **Connected Clients Monitor** - Live polling of connected devices (hostname, IP from DHCP leases, MAC address, RSSI signal, TX bitrate)
+- ⚡ **Built-in Realtek `8852cu` Optimizer** - Automatically detects [`rtl8852cu-9M2PJU-dkms`](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms) adapters and shows a 1-click **Enable & Reload** banner for `rtw_he_enable=2 rtw_vht_enable=2`
+- 🧹 **Clean Teardown** - Stopping the AP removes temporary NAT rules, stops `hostapd`/`dnsmasq`, and cleanly restores your adapter to NetworkManager managed mode
+- 💻 **Full CLI Included** - Control or script your hotspot headlessly over SSH (`aircast-ap start|stop|status|devices`)
 
 ---
 
@@ -96,14 +105,14 @@ aircast-ap devices
 ```
 
 ### 2. (Realtek RTL8852CU Users) Enable Full Wi-Fi 6 AP Parameters
-If you use [`rtl8852cu-9M2PJU-dkms`](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms), Realtek's driver defaults `rtw_he_enable=1` (STA only). AirCast-AP automatically displays a top banner — just click **Enable & Reload** (or run `sudo aircast-ap tune-8852cu`) to set `rtw_he_enable=2 rtw_vht_enable=2` in `/etc/modprobe.d/8852cu.conf` and reload the driver.
+If you use [`rtl8852cu-9M2PJU-dkms`](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms), Realtek's driver defaults `rtw_he_enable=1` (STA only). AirCast-AP automatically displays a top banner - just click **Enable & Reload** (or run `sudo aircast-ap tune-8852cu`) to set `rtw_he_enable=2 rtw_vht_enable=2` in `/etc/modprobe.d/8852cu.conf` and reload the driver.
 
 ### 3. Configure Your Hotspot
 1. **Wi-Fi Adapter:** Pick the adapter broadcasting the hotspot (e.g., `wlan1 (8852CU, Wi-Fi 6)`).
-2. **Network Name (SSID) & Passphrase:** Enter your SSID and an 8–63 character password.
+2. **Network Name (SSID) & Passphrase:** Enter your SSID and an 8-63 character password.
 3. **Band & Channel:**
-   - `5 GHz • Ch 36 (80 MHz)` or `Ch 149 (80 MHz)` — fastest Wi-Fi 6 throughput
-   - `2.4 GHz • Ch 6 (20 MHz)` — widest range & legacy IoT compatibility
+   - `5 GHz • Ch 36 (80 MHz)` or `Ch 149 (80 MHz)` - fastest Wi-Fi 6 throughput
+   - `2.4 GHz • Ch 6 (20 MHz)` - widest range & legacy IoT compatibility
 4. **Security:** `WPA2-PSK (AES)` works with every phone/laptop; pick `WPA2 / WPA3 Mixed` or `WPA3-SAE Only` for modern devices.
 5. **AP Backend:**
    - Choose **`hostapd + dnsmasq`** for full Wi-Fi 6 / 80 MHz / WPA3 control.
@@ -149,7 +158,7 @@ sudo aircast-ap tune-8852cu
 
 AirCast-AP works with **any** `nl80211` AP-capable Linux Wi-Fi adapter (Realtek, MediaTek, Intel, Qualcomm) and pairs seamlessly with our Linux 7.3+ DKMS driver:
 
-👉 **[9M2PJU/rtl8852cu-9M2PJU-dkms](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms)** — Linux 5.15–7.3+ & Clang/LLVM (CachyOS) DKMS driver for Realtek RTL8832CU & RTL8852CU USB Wi-Fi 6/6E adapters.
+👉 **[9M2PJU/rtl8852cu-9M2PJU-dkms](https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms)** - Linux 5.15-7.3+ & Clang/LLVM (CachyOS) DKMS driver for Realtek RTL8832CU & RTL8852CU USB Wi-Fi 6/6E adapters.
 
 ---
 

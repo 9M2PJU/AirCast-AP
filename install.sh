@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# AirCast-AP — Interactive 1-Line Installer
+# AirCast-AP - Interactive 1-Line Installer
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/9M2PJU/AirCast-AP/main/install.sh | bash
 # ==============================================================================
@@ -31,7 +31,7 @@ prompt_yn() {
 }
 
 printf "\n${CYAN}╭──────────────────────────────────────────────────────────────╮${RESET}\n"
-printf "${CYAN}│${RESET}  ${BOLD}📡 AirCast-AP — Linux Wi-Fi 6 AP Manager Installer${RESET}          ${CYAN}│${RESET}\n"
+printf "${CYAN}│${RESET}  ${BOLD}📡 AirCast-AP - Linux Wi-Fi 6 AP Manager Installer${RESET}          ${CYAN}│${RESET}\n"
 printf "${CYAN}│${RESET}  ${DIM}GTK4 + Libadwaita Native Wayland App & CLI • by 9M2PJU${RESET}      ${CYAN}│${RESET}\n"
 printf "${CYAN}╰──────────────────────────────────────────────────────────────╯${RESET}\n\n"
 
@@ -66,6 +66,11 @@ cat > "${BIN_DIR}/aircast-ap" <<EOF
 PYTHONPATH="${INSTALL_DIR}\${PYTHONPATH:+:\$PYTHONPATH}" exec python3 -m aircast_ap.cli "\$@"
 EOF
 chmod +x "${BIN_DIR}/aircast-ap"
+
+mkdir -p "${HOME}/.local/share/icons/hicolor/scalable/apps" "${HOME}/.local/share/icons/hicolor/256x256/apps"
+cp "${INSTALL_DIR}/data/icons/my.hamradio.AirCastAP.svg" "${HOME}/.local/share/icons/hicolor/scalable/apps/"
+cp "${INSTALL_DIR}/data/icons/aircast-ap-logo.png" "${HOME}/.local/share/icons/hicolor/256x256/apps/my.hamradio.AirCastAP.png"
+command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -f -t "${HOME}/.local/share/icons/hicolor" 2>/dev/null || true
 
 sed "s|^Exec=.*|Exec=${BIN_DIR}/aircast-ap gui|" "${INSTALL_DIR}/data/aircast-ap.desktop" > "${APP_DIR}/aircast-ap.desktop"
 command -v update-desktop-database >/dev/null 2>&1 && update-desktop-database "$APP_DIR" 2>/dev/null || true
