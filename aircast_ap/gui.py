@@ -370,7 +370,7 @@ class AirCastWindow(Adw.ApplicationWindow):
         dlg = Adw.AboutDialog(
             application_name="AirCast-AP",
             application_icon="my.hamradio.AirCastAP",
-            developer_name="9M2PJU (Faizul)",
+            developer_name="9M2PJU",
             version=__version__,
             website="https://github.com/9M2PJU/AirCast-AP",
             issue_url="https://github.com/9M2PJU/AirCast-AP/issues",
@@ -383,13 +383,13 @@ class AirCastWindow(Adw.ApplicationWindow):
             ),
         )
         dlg.set_developers([
-            "9M2PJU (Faizul) <9m2pju@hamradio.my>",
+            "9M2PJU <9m2pju@hamradio.my>",
         ])
         dlg.set_designers([
             "9M2PJU (UI & AirCast-AP Logo)",
         ])
         dlg.add_credit_section(
-            "Companion Driver & Upstream Projects",
+            "Companion Driver and Upstream Projects",
             [
                 "rtl8852cu-9M2PJU-dkms https://github.com/9M2PJU/rtl8852cu-9M2PJU-dkms",
                 "morrownr USB-WiFi https://github.com/morrownr/USB-WiFi",

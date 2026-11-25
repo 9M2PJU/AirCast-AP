@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aircast-ap"
-version = "1.0.2"
+version = "1.0.3"
 description = "Modern GTK4 + Libadwaita Wi-Fi 6 Access Point & Hotspot Manager for Linux"
 readme = "README.md"
 license = {text = "GPL-3.0-or-later"}
