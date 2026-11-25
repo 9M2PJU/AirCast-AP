@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=AirCast-AP
+GenericName=Wi-Fi 6 Hotspot Manager
+Comment=Turn your Linux Wi-Fi adapter into a Wi-Fi 6 / 5 GHz Access Point with QR sharing and NAT
+Exec=aircast-ap gui
+Icon=network-wireless-hotspot
+Terminal=false
+Type=Application
+Categories=Network;System;Settings;GTK;
+Keywords=wifi;hotspot;ap;access point;hostapd;rtl8852cu;share;
+StartupNotify=true
